@@ -1,3 +1,5 @@
+## 0.6.1 2020-10-30
+* Updated dependency
 ## 0.6.0 2020-10-30
 * Updated for Flutter 3.32
 ## 0.3.1 2020-10-30

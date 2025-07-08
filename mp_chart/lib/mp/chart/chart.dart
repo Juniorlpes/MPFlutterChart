@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:mp_chart/mp/controller/controller.dart';
 import 'package:optimized_gesture_detector/details.dart';
 import 'package:optimized_gesture_detector/optimized_gesture_detector.dart';
@@ -33,7 +33,7 @@ abstract class ChartState<T extends Chart> extends State<T> {
     isCapturing = true;
 
     _screenshotController.capture(pixelRatio: 3.0).then((imgFile) {
-      ImageGallerySaver.saveImage(imgFile!);
+      ImageGallerySaverPlus.saveImage(imgFile!);
       isCapturing = false;
     }).catchError((error) {
       isCapturing = false;
