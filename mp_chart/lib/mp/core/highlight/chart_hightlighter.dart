@@ -194,7 +194,6 @@ class ChartHighlighter<T extends BarLineScatterCandleBubbleDataProvider>
     for (int i = 0; i < closestValues.length; i++) {
       Highlight high = closestValues[i];
 
-      // TODO : it was good change?
       if (high.axis == axis) {
         double cDistance = getDistance(x, y, high.xPx!, high.yPx!);
         if (cDistance < distance!) {

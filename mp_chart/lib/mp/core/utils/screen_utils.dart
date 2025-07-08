@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui show window;
+import 'dart:ui' as ui;
 
 /**
  * @Author: thl
@@ -48,7 +48,8 @@ class ScreenUtils {
   }
 
   _init() {
-    MediaQueryData mediaQuery = MediaQueryData.fromView(ui.window);
+    MediaQueryData mediaQuery =
+        MediaQueryData.fromView(ui.PlatformDispatcher.instance.views.first);
     if (_mediaQueryData != mediaQuery) {
       _mediaQueryData = mediaQuery;
       _screenWidth = mediaQuery.size.width;

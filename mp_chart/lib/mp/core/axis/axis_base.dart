@@ -332,7 +332,6 @@ abstract class AxisBase extends ComponentBase {
   ///
   /// @return
   ValueFormatter? getValueFormatter() {
-    // TODO: ALWAYS not null, remove optional
     if (_axisValueFormatter == null ||
         (_axisValueFormatter is DefaultAxisValueFormatter &&
             (_axisValueFormatter as DefaultAxisValueFormatter).digits !=
@@ -382,7 +381,6 @@ abstract class AxisBase extends ComponentBase {
   /// @param spaceLength the length of space in between the pieces
   /// @param phase       offset, in degrees (normally, use 0)
   void enableAxisLineDashedLine(
-
       double lineLength, double spaceLength, double phase) {
     _axisLineDashPathEffect = DashPathEffect(lineLength, spaceLength, phase);
   }

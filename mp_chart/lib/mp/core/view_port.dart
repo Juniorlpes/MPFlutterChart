@@ -360,13 +360,8 @@ class ViewPortHandler {
     // min scale-y is 1f
     _scaleY = min(max(_minScaleY, curScaleY), _maxScaleY);
 
-    double width = 0;
-    double height = 0;
-
-    if (content != null) {
-      width = content.width;
-      height = content.height;
-    }
+    double width = content.width;
+    double height = content.height;
 
     double maxTransX = -width * (_scaleX - 1);
     _transX = min(max(curTransX, maxTransX - _transOffsetX!), _transOffsetX!);

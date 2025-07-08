@@ -472,10 +472,7 @@ class PieChartPainter extends PieRadarChartPainter<PieData?> {
 
   @override
   double getRadius() {
-    if (_circleBox == null)
-      return 0;
-    else
-      return min(_circleBox.width / 2.0, _circleBox.height / 2.0);
+    return min(_circleBox.width / 2.0, _circleBox.height / 2.0);
   }
 
   /// returns the circlebox, the boundingbox of the pie-chart slices

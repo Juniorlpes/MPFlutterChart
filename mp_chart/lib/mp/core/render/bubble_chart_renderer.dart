@@ -11,6 +11,7 @@ import 'package:mp_chart/mp/core/highlight/highlight.dart';
 import 'package:mp_chart/mp/core/render/bar_line_scatter_candle_bubble_renderer.dart';
 import 'package:mp_chart/mp/core/transformer/transformer.dart';
 import 'package:mp_chart/mp/core/utils/canvas_utils.dart';
+import 'package:mp_chart/mp/core/utils/color_utils.dart';
 import 'package:mp_chart/mp/core/utils/painter_utils.dart';
 import 'package:mp_chart/mp/core/value_formatter/value_formatter.dart';
 import 'package:mp_chart/mp/core/view_port.dart';
@@ -77,7 +78,8 @@ class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
     // calcualte the full width of 1 step on the x-axis
     final double maxBubbleWidth = (sizeBuffer[2]! - sizeBuffer[0]!).abs();
     final double maxBubbleHeight =
-        (viewPortHandler!.contentBottom() - viewPortHandler!.contentTop()).abs();
+        (viewPortHandler!.contentBottom() - viewPortHandler!.contentTop())
+            .abs();
     final double referenceSize = min(maxBubbleHeight, maxBubbleWidth);
 
     for (int j = xBounds!.min!; j <= xBounds!.range! + xBounds!.min!; j++) {
@@ -95,7 +97,8 @@ class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
           !viewPortHandler!.isInBoundsBottom(pointBuffer[1]! - shapeHalf))
         continue;
 
-      if (!viewPortHandler!.isInBoundsLeft(pointBuffer[0]! + shapeHalf)) continue;
+      if (!viewPortHandler!.isInBoundsLeft(pointBuffer[0]! + shapeHalf))
+        continue;
 
       if (!viewPortHandler!.isInBoundsRight(pointBuffer[0]! - shapeHalf)) break;
 
@@ -148,8 +151,12 @@ class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
         for (int j = 0; j < positions.length; j += 2) {
           Color valueTextColor =
               dataSet.getValueTextColor2(j ~/ 2 + xBounds!.min!);
-          valueTextColor = Color.fromARGB((255.0 * alpha).round(),
-              valueTextColor.red, valueTextColor.green, valueTextColor.blue);
+          valueTextColor = Color.fromARGB(
+            (255.0 * alpha).round(),
+            ColorUtils.to255(valueTextColor.r),
+            ColorUtils.to255(valueTextColor.g),
+            ColorUtils.to255(valueTextColor.b),
+          );
 
           double? x = positions[j];
           double? y = positions[j + 1];
@@ -193,8 +200,8 @@ class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
     valuePaint = PainterUtils.create(valuePaint, valueText, color, textSize,
         fontFamily: typeFace?.fontFamily, fontWeight: typeFace?.fontWeight);
     valuePaint!.layout();
-    valuePaint!.paint(
-        c, Offset(x - valuePaint!.width / 2, y - valuePaint!.height));
+    valuePaint!
+        .paint(c, Offset(x - valuePaint!.width / 2, y - valuePaint!.height));
   }
 
   @override
@@ -247,7 +254,8 @@ class BubbleChartRenderer extends BarLineScatterCandleBubbleRenderer {
           !viewPortHandler!.isInBoundsBottom(pointBuffer[1]! - shapeHalf))
         continue;
 
-      if (!viewPortHandler!.isInBoundsLeft(pointBuffer[0]! + shapeHalf)) continue;
+      if (!viewPortHandler!.isInBoundsLeft(pointBuffer[0]! + shapeHalf))
+        continue;
 
       if (!viewPortHandler!.isInBoundsRight(pointBuffer[0]! - shapeHalf)) break;
 

@@ -288,7 +288,7 @@ class CombinedChartPainter extends BarLineChartBasePainter<CombinedData?>
   ///
   /// @param order
   void setDrawOrder(List<DrawOrder> order) {
-    if (order == null || order.length <= 0) return;
+    if (order.length <= 0) return;
     _drawOrder = order;
   }
 

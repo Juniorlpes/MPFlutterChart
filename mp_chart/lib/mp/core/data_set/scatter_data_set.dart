@@ -118,7 +118,6 @@ class ScatterDataSet extends LineScatterCandleRadarDataSet<Entry>
   }
 
   static IShapeRenderer? getRendererForShape(ScatterShape shape) {
-    // TODO : should be optional? IShapeRenderer
     switch (shape) {
       case ScatterShape.SQUARE:
         return SquareShapeRenderer();

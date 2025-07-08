@@ -46,7 +46,6 @@ class CombinedData extends BarLineScatterCandleBubbleData<
 
   @override
   void calcMinMax1() {
-
     dataSets.clear();
 
     yMax = -double.infinity;
@@ -64,7 +63,8 @@ class CombinedData extends BarLineScatterCandleBubbleData<
     for (ChartData? data in allData) {
       data!.calcMinMax1();
 
-      List<IBarLineScatterCandleBubbleDataSet<Entry>> sets = data.dataSets as List<IBarLineScatterCandleBubbleDataSet<Entry>>;
+      List<IBarLineScatterCandleBubbleDataSet<Entry>> sets =
+          data.dataSets as List<IBarLineScatterCandleBubbleDataSet<Entry>>;
       dataSets.addAll(sets);
 
       if (data.getYMax1()! > yMax!) yMax = data.getYMax1();
@@ -177,12 +177,12 @@ class CombinedData extends BarLineScatterCandleBubbleData<
   }
 
   int getDataIndex(ChartData data) {
-    return getAllData().indexOf(data as BarLineScatterCandleBubbleData<IBarLineScatterCandleBubbleDataSet<Entry>>?);
+    return getAllData().indexOf(data as BarLineScatterCandleBubbleData<
+        IBarLineScatterCandleBubbleDataSet<Entry>>?);
   }
 
   @override
   bool removeDataSet1(IBarLineScatterCandleBubbleDataSet<Entry> d) {
-    // TODO fix that
     List<BarLineScatterCandleBubbleData?> datas = getAllData();
     bool success = false;
     for (ChartData? data in datas) {

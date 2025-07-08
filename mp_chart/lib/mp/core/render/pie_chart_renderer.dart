@@ -64,8 +64,12 @@ class PieChartRenderer extends DataRenderer {
 
     _transparentCirclePaint = Paint()
       ..isAntiAlias = true
-      ..color = Color.fromARGB(105, ColorUtils.WHITE.red,
-          ColorUtils.WHITE.green, ColorUtils.WHITE.blue)
+      ..color = Color.fromARGB(
+        105,
+        ColorUtils.to255(ColorUtils.WHITE.r),
+        ColorUtils.to255(ColorUtils.WHITE.g),
+        ColorUtils.to255(ColorUtils.WHITE.b),
+      )
       ..style = PaintingStyle.fill;
 
     _centerTextPaint = PainterUtils.create(
@@ -746,17 +750,18 @@ class PieChartRenderer extends DataRenderer {
 //      }
 
       // only draw the circle if it can be seen (not covered by the hole)
-      if (_transparentCirclePaint!.color.alpha > 0 &&
+      if (ColorUtils.to255(_transparentCirclePaint!.color.a) > 0 &&
           _painter!.getTransparentCircleRadius() > _painter!.getHoleRadius()) {
-        int alpha = _transparentCirclePaint!.color.alpha;
+        int alpha = ColorUtils.to255(_transparentCirclePaint!.color.a);
         double secondHoleRadius =
             radius * (_painter!.getTransparentCircleRadius() / 100);
 
         _transparentCirclePaint!.color = Color.fromARGB(
-            (alpha * animator!.getPhaseX() * animator!.getPhaseY()).toInt(),
-            _transparentCirclePaint!.color.red,
-            _transparentCirclePaint!.color.green,
-            _transparentCirclePaint!.color.blue);
+          (alpha * animator!.getPhaseX() * animator!.getPhaseY()).toInt(),
+          ColorUtils.to255(_transparentCirclePaint!.color.r),
+          ColorUtils.to255(_transparentCirclePaint!.color.g),
+          ColorUtils.to255(_transparentCirclePaint!.color.b),
+        );
 
         // draw the transparent-circle
         mHoleCirclePath.reset();
@@ -776,10 +781,11 @@ class PieChartRenderer extends DataRenderer {
 
         // reset alpha
         _transparentCirclePaint!.color = Color.fromARGB(
-            alpha,
-            _transparentCirclePaint!.color.red,
-            _transparentCirclePaint!.color.green,
-            _transparentCirclePaint!.color.blue);
+          alpha,
+          ColorUtils.to255(_transparentCirclePaint!.color.r),
+          ColorUtils.to255(_transparentCirclePaint!.color.g),
+          ColorUtils.to255(_transparentCirclePaint!.color.b),
+        );
       }
       MPPointF.recycleInstance(center);
     }
@@ -792,7 +798,7 @@ class PieChartRenderer extends DataRenderer {
   void drawCenterText(Canvas c) {
     String centerText = _painter!.getCenterText();
 
-    if (_painter!.isDrawCenterTextEnabled() && centerText != null) {
+    if (_painter!.isDrawCenterTextEnabled()) {
       MPPointF center = _painter!.getCenterCircleBox();
       MPPointF offset = _painter!.getCenterTextOffset();
 
@@ -1138,7 +1144,12 @@ class PieChartRenderer extends DataRenderer {
   /// @param color
   void setTransparentCircleColor(Color color) {
     Paint p = transparentCirclePaint!;
-    p.color = Color.fromARGB(p.color.alpha, color.red, color.green, color.blue);
+    p.color = Color.fromARGB(
+      ColorUtils.to255(p.color.a),
+      ColorUtils.to255(color.r),
+      ColorUtils.to255(color.g),
+      ColorUtils.to255(color.b),
+    );
   }
 
   /// Sets the amount of transparency the transparent circle should have 0 = fully transparent,
@@ -1148,8 +1159,12 @@ class PieChartRenderer extends DataRenderer {
   /// @param alpha 0-255
   void setTransparentCircleAlpha(int alpha) {
     Color color = transparentCirclePaint!.color;
-    transparentCirclePaint!.color =
-        Color.fromARGB(alpha, color.red, color.green, color.blue);
+    transparentCirclePaint!.color = Color.fromARGB(
+      alpha,
+      ColorUtils.to255(color.r),
+      ColorUtils.to255(color.g),
+      ColorUtils.to255(color.b),
+    );
   }
 
   /// Sets the color the entry labels are drawn with.

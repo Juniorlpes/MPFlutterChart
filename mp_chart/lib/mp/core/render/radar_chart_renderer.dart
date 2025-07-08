@@ -124,12 +124,12 @@ class RadarChartRenderer extends LineRadarRenderer {
         drawFilledPath3(
             c,
             surface,
-            dataSet.getGradientColor1()!.startColor.value,
-            dataSet.getGradientColor1()!.endColor.value,
+            dataSet.getGradientColor1()!.startColor.toARGB32(),
+            dataSet.getGradientColor1()!.endColor.toARGB32(),
             dataSet.getFillAlpha());
       } else {
-        drawFilledPath2(
-            c, surface, dataSet.getFillColor().value, dataSet.getFillAlpha());
+        drawFilledPath2(c, surface, dataSet.getFillColor().toARGB32(),
+            dataSet.getFillAlpha());
       }
 //      }
     }
@@ -164,7 +164,8 @@ class RadarChartRenderer extends LineRadarRenderer {
     double? yoffset = Utils.convertDpToPixel(5);
 
     for (int i = 0; i < _painter!.getData()!.getDataSetCount(); i++) {
-      IRadarDataSet dataSet = _painter!.getData()!.getDataSetByIndex(i) as IRadarDataSet;
+      IRadarDataSet dataSet =
+          _painter!.getData()!.getDataSetByIndex(i) as IRadarDataSet;
 
       if (!shouldDrawValues(dataSet)) continue;
 
@@ -223,8 +224,8 @@ class RadarChartRenderer extends LineRadarRenderer {
     valuePaint = PainterUtils.create(valuePaint, valueText, color, textSize,
         fontFamily: typeFace?.fontFamily, fontWeight: typeFace?.fontWeight);
     valuePaint!.layout();
-    valuePaint!.paint(
-        c, Offset(x - valuePaint!.width / 2, y - valuePaint!.height));
+    valuePaint!
+        .paint(c, Offset(x - valuePaint!.width / 2, y - valuePaint!.height));
   }
 
   @override
@@ -246,8 +247,12 @@ class RadarChartRenderer extends LineRadarRenderer {
     var color = _painter!.webColor!;
     _webPaint
       ?..strokeWidth = _painter!.webLineWidth
-      ..color =
-          Color.fromARGB(_painter!.webAlpha, color.red, color.green, color.blue);
+      ..color = Color.fromARGB(
+        _painter!.webAlpha,
+        ColorUtils.to255(color.r),
+        ColorUtils.to255(color.g),
+        ColorUtils.to255(color.b),
+      );
 
     final int xIncrements = 1 + _painter!.skipWebLineCount;
     int maxEntryCount =
@@ -266,8 +271,12 @@ class RadarChartRenderer extends LineRadarRenderer {
     color = _painter!.webColorInner!;
     _webPaint
       ?..strokeWidth = _painter!.innerWebLineWidth
-      ..color =
-          Color.fromARGB(_painter!.webAlpha, color.red, color.green, color.blue);
+      ..color = Color.fromARGB(
+        _painter!.webAlpha,
+        ColorUtils.to255(color.r),
+        ColorUtils.to255(color.g),
+        ColorUtils.to255(color.b),
+      );
 
     int labelCount = _painter!.yAxis!.entryCount;
 

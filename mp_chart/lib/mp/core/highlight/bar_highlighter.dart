@@ -87,7 +87,7 @@ class BarHighlighter extends ChartHighlighter<BarDataProvider> {
   /// @param value
   /// @return
   int getClosestStackIndex(List<Range?> ranges, double? value) {
-    if (ranges == null || ranges.length == 0) return 0;
+    if (ranges.length == 0) return 0;
     int stackIndex = 0;
     for (Range? range in ranges) {
       if (range!.contains(value!))
